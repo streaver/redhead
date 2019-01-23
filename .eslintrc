@@ -1,3 +1,9 @@
 {
-  "extends": "oclif"
+  "extends": [
+    "airbnb"
+  ],
+  "env": {
+    "mocha": true,
+    "node": true
+  }
 }
