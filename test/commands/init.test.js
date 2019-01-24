@@ -7,6 +7,10 @@ describe('init', () => {
     rimraf.sync('.redhead');
   });
 
+  afterEach(() => {
+    rimraf.sync('.redhead');
+  });
+
   test
     .stdout()
     .command(['init'])

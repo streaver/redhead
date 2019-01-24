@@ -41,9 +41,16 @@ class BuildCommand extends Command {
           fs.mkdirSync(outputFolder);
         }
 
+        // eslint-disable-next-line global-require, import/no-dynamic-require
         const config = require(path.join(process.cwd(), configPath));
 
-        fs.writeFileSync(path.join(process.cwd(), outputFolder, mapping.outputFile), mapping.writer(config));
+        const configOutputPath = path.join(
+          process.cwd(),
+          outputFolder,
+          mapping.outputFile,
+        );
+
+        fs.writeFileSync(configOutputPath, mapping.writer(config));
       }
     });
   }
