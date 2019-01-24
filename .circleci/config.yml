@@ -39,7 +39,7 @@ jobs:
 
 workflows:
   version: 2
-  "netlify-redhead":
+  "redhead":
     jobs:
       - node-latest
       - node-8
