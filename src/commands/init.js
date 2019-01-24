@@ -2,16 +2,19 @@ const { Command, flags: option } = require('@oclif/command');
 const chalk = require('chalk');
 const fs = require('fs');
 const path = require('path');
+const { copySync } = require('fs-extra');
 
-const REDHEAD_DIRECTORY = '.redhead';
-const HEADERS_FILE = 'headers';
-const REDIRECTS_FILE = 'redirects';
+const { configFilePath } = require('../helpers/path-generator.js');
+const {
+  REDHEAD_DIRECTORY,
+  HEADERS_FILE,
+  REDIRECTS_FILE,
+} = require('../helpers/path-constants');
 
 class InitCommand extends Command {
   run() {
     const { flags } = this.parse(InitCommand);
     const {
-      extension,
       'no-headers': noHeaders,
       'no-redirects': noRedirects,
     } = flags;
@@ -21,11 +24,11 @@ class InitCommand extends Command {
     this.createConfigFolder();
 
     if (!noHeaders) {
-      this.createHeadersFile(extension);
+      this.createIfNotExists(REDHEAD_DIRECTORY, HEADERS_FILE);
     }
 
     if (!noRedirects) {
-      this.createRedirectsFile(extension);
+      this.createIfNotExists(REDHEAD_DIRECTORY, REDIRECTS_FILE);
     }
   }
 
@@ -38,23 +41,14 @@ class InitCommand extends Command {
     }
   }
 
-  createHeadersFile(extension) {
-    const headersFilePath = InitCommand.configFilePath(HEADERS_FILE, extension);
+  createIfNotExists(directory, file) {
+    const filePath = configFilePath(directory, file);
 
-    this.createIfNotExists(headersFilePath);
-  }
-
-  createRedirectsFile(extension) {
-    const redirectsFilePath = InitCommand.configFilePath(REDIRECTS_FILE, extension);
-
-    this.createIfNotExists(redirectsFilePath);
-  }
-
-  createIfNotExists(filePath) {
     if (fs.existsSync(filePath)) {
       this.existsLog(filePath);
     } else {
-      fs.closeSync(fs.openSync(filePath, 'w'));
+      copySync(path.join('src', 'templates', file), path.join(process.cwd(), filePath));
+
       this.createdLog(filePath);
     }
   }
@@ -66,10 +60,6 @@ class InitCommand extends Command {
   existsLog(filePath) {
     this.log(chalk.yellow(`\texists ${filePath}`));
   }
-
-  static configFilePath(fileName, extension) {
-    return path.join(REDHEAD_DIRECTORY, `${fileName}.${extension}`);
-  }
 }
 
 InitCommand.description = `Initialize the required files
@@ -78,12 +68,6 @@ Generates files for handling your headers and/or redirects configuration.
 `;
 
 InitCommand.flags = {
-  extension: option.string({
-    char: 'e',
-    description: 'Desired extension for generating config files.',
-    options: ['js'],
-    default: 'js',
-  }),
   'no-headers': option.boolean({
     char: 'h',
     description: 'Whether or not to handle headers with redhead',
