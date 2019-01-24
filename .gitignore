@@ -4,4 +4,5 @@
 /dist
 /package-lock.json
 /tmp
-node_modules
+/node_modules
+/.redhead
