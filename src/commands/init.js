@@ -47,7 +47,7 @@ class InitCommand extends Command {
     if (fs.existsSync(filePath)) {
       this.existsLog(filePath);
     } else {
-      copySync(path.join('src', 'templates', file), path.join(process.cwd(), filePath));
+      copySync(path.join(__dirname, '..', 'templates', file), path.join(process.cwd(), filePath));
 
       this.createdLog(filePath);
     }
