@@ -39,7 +39,10 @@
   ],
   "homepage": "https://github.com/streaver/redhead",
   "keywords": [
-    "oclif"
+    "headers",
+    "redirects",
+    "netlify",
+    "dynamic"
   ],
   "license": "MIT",
   "main": "src/index.js",

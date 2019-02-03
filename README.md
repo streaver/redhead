@@ -66,6 +66,46 @@ USAGE
 * [`redhead help [COMMAND]`](#redhead-help-command)
 * [`redhead init`](#redhead-init)
 
+## `redhead init`
+
+Initialize the required files. This fill create the folder `.redhead` with the files `.redhead/headers.js` and/or `.redhead/redirects.js` where you can dynamically define your headers/redirects.
+
+```
+USAGE
+  $ redhead init
+
+OPTIONS
+  -h, --no-headers    Whether or not to handle headers with redhead
+  -r, --no-redirects  Whether or not to handle redirects with redhead
+
+DESCRIPTION
+  Generates files for handling your headers and/or redirects configuration.
+```
+
+_See code: [src/commands/init.js](https://github.com/streaver/redhead/blob/v0.3.0/src/commands/init.js)_
+
+For example, if you want to have different headers based on the environment you just need to custommize the `headers.js` file for your needs:
+
+```js
+// .redhead/headers.js
+
+const headers = [];
+
+if (process.env.NODE_ENV === 'production') {
+  headers.push({
+    path: '/cool',
+    headers: [
+      'X-Cool: 123'
+    ],
+  });
+}
+
+module.exports = headers;
+
+```
+
+<!-- commandsstop -->
+
 ## `redhead build`
 
 Generate the platform specific files based on the configuration
@@ -96,25 +136,6 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.1.4/src/commands/help.ts)_
-
-## `redhead init`
-
-Initialize the required files
-
-```
-USAGE
-  $ redhead init
-
-OPTIONS
-  -h, --no-headers    Whether or not to handle headers with redhead
-  -r, --no-redirects  Whether or not to handle redirects with redhead
-
-DESCRIPTION
-  Generates files for handling your headers and/or redirects configuration.
-```
-
-_See code: [src/commands/init.js](https://github.com/streaver/redhead/blob/v0.3.0/src/commands/init.js)_
-<!-- commandsstop -->
 
 <!-- contributing -->
 ## Contributing
