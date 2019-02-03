@@ -108,7 +108,7 @@ module.exports = headers;
 
 ## `redhead build`
 
-Generate the platform specific files based on the configuration
+Generate the platform specific files based on the configuration. Currently only [Netlify](https://netlify.com) is supported, but we plan to add support for [Firebase Hosting](https://firebase.google.com/docs/hosting/) and [Heroku Buildpack Static](https://github.com/heroku/heroku-buildpack-static)
 
 ```
 USAGE
