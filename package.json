@@ -1,8 +1,7 @@
 {
   "name": "redhead",
-  "description": "Setup your netlify headers and redirects at build time",
-  "version": "0.0.0",
-  "author": "Federico Kauffman",
+  "description": "Dynamically setup headers and redirects for you static deployments",
+  "version": "0.1.0",
   "bin": {
     "redhead": "./bin/run"
   },
