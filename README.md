@@ -27,15 +27,7 @@ RedHead
 </p>
 
 <!-- toc -->
-## Table of content
-* [Installation](#installation)
-* [Usage](#usage)
-* [Commands](#commands)
-  * [init](#redhead-init)
-  * [build](#redhead-build)
-  * [help](#redhead-help-command)
-* [Contributing](#contributing)
-* [Credits](#credits)
+
 <!-- tocstop -->
 
 <!-- installation -->
@@ -56,13 +48,12 @@ yarn add redhead --dev
 <!-- installationstop -->
 
 <!-- usage -->
-# Usage
-
 ```sh-session
+$ npm install -g redhead
 $ redhead COMMAND
 running command...
 $ redhead (-v|--version|version)
-redhead/0.1.0 darwin-x64 node-v10.15.0
+redhead/0.2.0 darwin-x64 node-v10.15.0
 $ redhead --help [COMMAND]
 USAGE
   $ redhead COMMAND
@@ -71,15 +62,44 @@ USAGE
 <!-- usagestop -->
 
 <!-- commands -->
-# Commands
-
-* [`redhead init`](#redhead-init)
 * [`redhead build`](#redhead-build)
 * [`redhead help [COMMAND]`](#redhead-help-command)
+* [`redhead init`](#redhead-init)
+
+## `redhead build`
+
+Generate the platform specific files based on the configuration
+
+```
+USAGE
+  $ redhead build
+
+OPTIONS
+  -o, --output=output  [default: .] Folder where the generated files should be saved.
+```
+
+_See code: [src/commands/build.js](https://github.com/streaver/redhead/blob/v0.2.0/src/commands/build.js)_
+
+## `redhead help [COMMAND]`
+
+display help for redhead
+
+```
+USAGE
+  $ redhead help [COMMAND]
+
+ARGUMENTS
+  COMMAND  command to show help for
+
+OPTIONS
+  --all  see all commands in CLI
+```
+
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.1.4/src/commands/help.ts)_
 
 ## `redhead init`
 
-Initialize the required files for handling your redirects/headers with redhead.
+Initialize the required files
 
 ```
 USAGE
@@ -93,32 +113,7 @@ DESCRIPTION
   Generates files for handling your headers and/or redirects configuration.
 ```
 
-## `redhead build`
-
-Generate the platform specific files based on the configuration. Currently we only support [Netlify](https://www.netlify.com/). But we plan to add Firebase Hosting, Heroku, etc.
-
-```
-USAGE
-  $ redhead build
-
-OPTIONS
-  -o, --output=output  [default: .] Folder where the generated files should be saved.
-```
-
-## `redhead help [COMMAND]`
-
-Display help for redhead
-
-```
-USAGE
-  $ redhead help [COMMAND]
-
-ARGUMENTS
-  COMMAND  command to show help for
-
-OPTIONS
-  --all  see all commands in CLI
-```
+_See code: [src/commands/init.js](https://github.com/streaver/redhead/blob/v0.2.0/src/commands/init.js)_
 <!-- commandsstop -->
 
 <!-- contributing -->
