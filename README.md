@@ -14,6 +14,12 @@ RedHead
     <a href="https://circleci.com/gh/streaver/redhead/tree/master">
       <img src="https://circleci.com/gh/streaver/redhead/tree/master.svg?style=shield" />
     </a>
+    <a href="https://codeclimate.com/github/streaver/redhead">
+      <img src="https://img.shields.io/codeclimate/coverage/streaver/redhead.svg?style=flat" />
+    </a>
+    <a href="https://codeclimate.com/github/streaver/redhead">
+      <img src="https://img.shields.io/codeclimate/maintainability/streaver/redhead.svg?style=flat" />
+    </a>
     <a href="https://github.com/streaver/redhead/blob/master/LICENSE">
       <img src="https://img.shields.io/github/license/streaver/redhead.svg" />
     </a>
