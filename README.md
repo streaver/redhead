@@ -146,7 +146,7 @@ module.exports = headers;
 
 ### Redirecting one path to the latest post
 
-Let's say you have a blog and want to have a `/latests` path that always takes users to the latest post that has been published, this could be easily achieved with RedHead.
+Let's say you have a blog and want to have a `/latest` path that always takes users to the latest post that has been published, this could be easily achieved with RedHead.
 
 ```js
 // .redhead/redirects.js
