@@ -26,13 +26,18 @@ RedHead
   </p>
 </p>
 
-<!-- toc -->
-
-<!-- tocstop -->
-
-<!-- installation -->
-
 <p align="center"><strong>WARNING:</strong> This is still in active development, make sure you lock your versions!<p>
+
+## Table of content
+* [Installation](#installation)
+* [Usage](#usage)
+* [Commands](#commands)
+  * [init](#redhead-init)
+  * [build](#redhead-build)
+  * [help](#redhead-help-command)
+* [Examples](#examples)
+* [Contributing](#contributing)
+* [Credits](#credits)
 
 ## Installation
 
@@ -45,7 +50,6 @@ Or you can add it to your `package.json`
 ```bash
 yarn add redhead --dev
 ```
-<!-- installationstop -->
 
 <!-- usage -->
 ```sh-session
@@ -116,48 +120,56 @@ DESCRIPTION
 _See code: [src/commands/init.js](https://github.com/streaver/redhead/blob/v0.3.1/src/commands/init.js)_
 <!-- commandsstop -->
 
-## `redhead build`
+## Examples
 
-Generate the platform specific files based on the configuration. Currently only [Netlify](https://netlify.com) is supported, but we plan to add support for [Firebase Hosting](https://firebase.google.com/docs/hosting/) and [Heroku Buildpack Static](https://github.com/heroku/heroku-buildpack-static)
+### Different config based on environment
+
+For example, if you want to have different headers based on the environment you just need to customize the `headers.js` file for your needs and make sure you ENV variables are set for each case, for Netlify this could be done via the `netlify.toml` file.
+
+```js
+// .redhead/headers.js
+
+const headers = [];
+
+if (process.env.NODE_ENV === 'production') {
+  headers.push({
+    path: '/cool',
+    headers: [
+      'X-Cool: 123'
+    ],
+  });
+}
+
+module.exports = headers;
 
 ```
-USAGE
-  $ redhead build
 
-OPTIONS
-  -o, --output=output  [default: .] Folder where the generated files should be saved.
+### Redirecting one path to the latest post
+
+Let's say you have a blog and want to have a `/latests` path that always takes users to the latest post that has been published, this could be easily achieved with RedHead.
+
+```js
+// .redhead/redirects.js
+
+// use your DB library here;
+const db = require('db').config(process.env.CONNECTION_URL);
+const lastPost = db.posts.last();
+
+module.exports = [{
+  from: '/latest',
+  to: `${lastPost.permalink}`,
+  status: '302',
+  options: '',
+}];
+
 ```
 
-_See code: [src/commands/build.js](https://github.com/streaver/redhead/blob/v0.3.0/src/commands/build.js)_
-
-## `redhead help [COMMAND]`
-
-display help for redhead
-
-```
-USAGE
-  $ redhead help [COMMAND]
-
-ARGUMENTS
-  COMMAND  command to show help for
-
-OPTIONS
-  --all  see all commands in CLI
-```
-
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.1.4/src/commands/help.ts)_
-
-<!-- contributing -->
 ## Contributing
 
 All contributions or issue reporting are welcomed. If you are filing a bug please include information to help debug it!
 
 If you plan to contribute, please make sure you test the code.
 
-<!-- contributingstop -->
-
-<!-- credits -->
 ## Credits
 
 - <div>Icon made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
-<!-- creditsstop -->
