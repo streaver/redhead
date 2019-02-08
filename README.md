@@ -57,7 +57,7 @@ $ npm install -g redhead
 $ redhead COMMAND
 running command...
 $ redhead (-v|--version|version)
-redhead/0.3.1 darwin-x64 node-v10.15.0
+redhead/0.3.2 darwin-x64 node-v10.15.1
 $ redhead --help [COMMAND]
 USAGE
   $ redhead COMMAND
@@ -82,7 +82,7 @@ OPTIONS
   -o, --output=output  [default: .] Folder where the generated files should be saved.
 ```
 
-_See code: [src/commands/build.js](https://github.com/streaver/redhead/blob/v0.3.1/src/commands/build.js)_
+_See code: [src/commands/build.js](https://github.com/streaver/redhead/blob/v0.3.2/src/commands/build.js)_
 
 ## `redhead help [COMMAND]`
 
@@ -117,7 +117,7 @@ DESCRIPTION
   Generates files for handling your headers and/or redirects configuration.
 ```
 
-_See code: [src/commands/init.js](https://github.com/streaver/redhead/blob/v0.3.1/src/commands/init.js)_
+_See code: [src/commands/init.js](https://github.com/streaver/redhead/blob/v0.3.2/src/commands/init.js)_
 <!-- commandsstop -->
 
 ## Examples
