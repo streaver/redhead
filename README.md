@@ -28,6 +28,22 @@ RedHead
 
 <p align="center"><strong>WARNING:</strong> This is still in active development, make sure you lock your versions!<p>
 
+## Motivation
+
+When deploying our [website](https://www.streaver.com) we realized we wanted to have a very subtle difference in the redirects if the environment was `staging` or `production`, we could have gone for the ENV variable option, but the [netlify.toml](https://www.netlify.com/docs/netlify-toml-reference/) file does not allow environment variable interpolation, so you end up having to use a `sed` command (or multiple) to do the replacement, something like:
+
+```sh-session
+sed -i s/REDIRECT_1_PLACEHOLDER/${REDIRECT_1_VALUE}/g netlify.toml
+sed -i s/REDIRECT_2_PLACEHOLDER/${REDIRECT_2_VALUE}/g netlify.toml
+yarn build
+```
+
+After that, we noticed that many static deployment sites have similar limitations, that lead us to creating [RedHead](https://github.com/streaver/readhead), and now you can simply do:
+
+```sh-session
+redhead build && yarn build
+```
+
 ## Table of content
 * [Installation](#installation)
 * [Usage](#usage)
