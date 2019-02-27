@@ -2,7 +2,7 @@ const { expect, test } = require('@oclif/test');
 const rimraf = require('rimraf');
 const fs = require('fs');
 
-describe('build', () => {
+describe('build netlify', () => {
   beforeEach(() => {
     rimraf.sync('.redhead');
     rimraf.sync('_headers');
