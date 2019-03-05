@@ -26,6 +26,7 @@
     "eslint-plugin-react": "^7.11.0",
     "globby": "^9",
     "mocha": "^6",
+    "mock-fs": "^4.8.0",
     "nyc": "^13"
   },
   "engines": {

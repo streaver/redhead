@@ -1,61 +1,42 @@
 const fs = require('fs');
 const path = require('path');
 const Writer = require('../writer');
-const { configFilePath } = require('../../helpers/path-generator.js');
-const { REDHEAD_DIRECTORY } = require('../../helpers/path-constants');
 
-const {
-  HEADERS_FILE,
-  REDIRECTS_FILE,
-} = require('../../helpers/path-constants');
-
-function headersWriter(config) {
-  return config.map((rule) => {
-    const headers = rule.headers.map(h => `\t${h}`).join('\n');
-
-    return `${rule.path}\n${headers}`;
-  }).join('\n');
-}
-
-function redirectsWriter(config) {
-  return config.map(rule => `${rule.from}\t${rule.to}\t${rule.status}\t${rule.options}`).join('\n');
-}
-
-const CONFIG_MAPPING = [
-  {
-    configFile: HEADERS_FILE,
-    outputFile: '_headers',
-    writer: headersWriter,
-  },
-  {
-    configFile: REDIRECTS_FILE,
-    outputFile: '_redirects',
-    writer: redirectsWriter,
-  },
-];
+const NETLIFY_HEADERS_FILE = '_headers';
+const NETLIFY_REDIRECTS_FILE = '_redirects';
 
 module.exports = class NetlifyWriter extends Writer {
-  write() {
-    CONFIG_MAPPING.forEach((mapping) => {
-      const configPath = configFilePath(REDHEAD_DIRECTORY, mapping.configFile);
-      const pathExists = fs.existsSync(configPath);
+  writeRedirects() {
+    if (this.redirectsConfig) {
+      const redirectsConfigOutput = this.redirectsConfig.map(rule => `${rule.from}\t${rule.to}\t${rule.status}\t${rule.options}`).join('\n');
 
-      if (pathExists) {
-        if (!fs.existsSync(this.output)) {
-          fs.mkdirSync(this.output);
-        }
+      this.writeConfig(redirectsConfigOutput, NETLIFY_REDIRECTS_FILE);
+    }
+  }
 
-        // eslint-disable-next-line global-require, import/no-dynamic-require
-        const config = require(path.join(process.cwd(), configPath));
+  writeHeaders() {
+    if (this.headersConfig) {
+      const headersConfigOutput = this.headersConfig.map((rule) => {
+        const headers = rule.headers.map(h => `\t${h}`).join('\n');
 
-        const configOutputPath = path.join(
-          process.cwd(),
-          this.output,
-          mapping.outputFile,
-        );
+        return `${rule.path}\n${headers}`;
+      }).join('\n');
 
-        fs.writeFileSync(configOutputPath, mapping.writer(config));
-      }
-    });
+      this.writeConfig(headersConfigOutput, NETLIFY_HEADERS_FILE);
+    }
+  }
+
+  writeConfig(config, file) {
+    if (!fs.existsSync(this.outputFolder)) {
+      fs.mkdirSync(this.outputFolder);
+    }
+
+    const configOutputPath = path.join(
+      process.cwd(),
+      this.outputFolder,
+      file,
+    );
+
+    fs.writeFileSync(configOutputPath, config);
   }
 };

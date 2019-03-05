@@ -1,5 +1,10 @@
 const { Command, flags: option } = require('@oclif/command');
-const path = require('path');
+const { NetlifyWriter, FirebaseWriter } = require('../config-writers/platforms');
+
+const platformMapping = {
+  netlify: NetlifyWriter,
+  firebase: FirebaseWriter,
+};
 
 class BuildCommand extends Command {
   run() {
@@ -10,9 +15,8 @@ class BuildCommand extends Command {
   }
 
   static writeConfig(outputFolder, platform) {
-    // eslint-disable-next-line global-require, import/no-dynamic-require
-    const PlatformWriter = require(path.join(__dirname, '..', 'config-writers', 'platforms', `${platform}.js`));
-    const platformWriterInstance = new PlatformWriter(outputFolder);
+    const PlatformWriter = platformMapping[platform];
+    const platformWriterInstance = new PlatformWriter({ outputFolder });
 
     platformWriterInstance.write();
   }
@@ -29,7 +33,7 @@ BuildCommand.flags = {
   platform: option.string({
     char: 'p',
     description: 'The target platform for the generated files',
-    options: ['netlify'],
+    options: ['netlify', 'firebase'],
     default: 'netlify',
   }),
 };
