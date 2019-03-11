@@ -122,9 +122,9 @@
     tslib "^1.9.3"
 
 "@oclif/dev-cli@^1":
-  version "1.21.2"
-  resolved "https://registry.yarnpkg.com/@oclif/dev-cli/-/dev-cli-1.21.2.tgz#66138127e8ae89390d709c1f81d488080786fbbc"
-  integrity sha512-KaZaimB9hi2E4/+5kZ3ilUOCTCp2KDmQZQ9syw1CwWNHBg1OV+UDG/28PPs/xLng687mV1kbjERT/MlkqRpG1A==
+  version "1.21.3"
+  resolved "https://registry.yarnpkg.com/@oclif/dev-cli/-/dev-cli-1.21.3.tgz#229b69d90ef6b9b121e5b2c3a2751ad90c1a417d"
+  integrity sha512-TYhK6kz1skw28VZq6R5anSpwidZl+48jnDdKuwc3bbyaqyCqXQAnDAxliW562iDt3GkdOxpdDMza7O4qtyDSYQ==
   dependencies:
     "@oclif/command" "^1.5.10"
     "@oclif/config" "^1.12.8"
