@@ -38,7 +38,7 @@ sed -i s/REDIRECT_2_PLACEHOLDER/${REDIRECT_2_VALUE}/g netlify.toml
 yarn build
 ```
 
-After that, we noticed that many static deployment sites have similar limitations, that lead us to creating [RedHead](https://github.com/streaver/readhead), and now you can simply do:
+After that, we noticed that many static deployment sites have similar limitations, that lead us to creating [RedHead](https://github.com/streaver/redhead), and now you can simply do:
 
 ```sh-session
 redhead build && yarn build
