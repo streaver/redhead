@@ -1,29 +1,18 @@
 const { expect, test } = require('@oclif/test');
-const rimraf = require('rimraf');
 const fs = require('fs');
+const mock = require('mock-fs');
 
-describe('build', () => {
-  beforeEach(() => {
-    rimraf.sync('.redhead');
-    rimraf.sync('_headers');
-    rimraf.sync('_redirects');
-    rimraf.sync('dist/_headers');
-    rimraf.sync('dist/_redirects');
-  });
-
+describe('build netlify', () => {
   afterEach(() => {
-    rimraf.sync('.redhead');
-    rimraf.sync('_headers');
-    rimraf.sync('_redirects');
-    rimraf.sync('dist/_headers');
-    rimraf.sync('dist/_redirects');
+    mock.restore();
   });
 
   test
     .stdout()
     .command(['init', '--no-redirects'])
     .do(() => {
-      fs.writeFileSync('.redhead/headers.js', `
+      mock({
+        '.redhead/headers.js': `
         module.exports = [
           {
             path: '/test1/*',
@@ -39,7 +28,8 @@ describe('build', () => {
             ],
           },
         ];
-      `);
+      `,
+      });
     })
     .command(['build'])
     .it('creates _headers from config file', () => {
@@ -57,7 +47,8 @@ describe('build', () => {
     .stdout()
     .command(['init', '--no-headers'])
     .do(() => {
-      fs.writeFileSync('.redhead/redirects.js', `
+      mock({
+        '.redhead/redirects.js': `
         module.exports = [
           {
             from: '/path1',
@@ -72,7 +63,8 @@ describe('build', () => {
             options: 'Role=admin',
           }
         ];
-      `);
+      `,
+      });
     })
     .command(['build'])
     .it('creates _redirects from config file', () => {
@@ -87,7 +79,8 @@ describe('build', () => {
     .stdout()
     .command(['init', '--no-headers'])
     .do(() => {
-      fs.writeFileSync('.redhead/redirects.js', `
+      mock({
+        '.redhead/redirects.js': `
         module.exports = [
           {
             from: '/path1',
@@ -102,7 +95,8 @@ describe('build', () => {
             options: 'Role=admin',
           }
         ];
-      `);
+      `,
+      });
     })
     .command(['build', '--output', 'dist'])
     .it('creates dist/_redirects from config file', () => {

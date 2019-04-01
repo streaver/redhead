@@ -6,4 +6,5 @@
 /tmp
 /node_modules
 /.redhead
-/.coverage
+/coverage
+/.vscode
