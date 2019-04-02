@@ -45,7 +45,9 @@ redhead build && yarn build
 ```
 
 ## Table of content
+
 * [Installation](#installation)
+* [Supported Platforms](#supported-platforms)
 * [Usage](#usage)
 * [Commands](#commands)
   * [init](#redhead-init)
@@ -80,6 +82,21 @@ USAGE
 ...
 ```
 <!-- usagestop -->
+
+## Supported Platforms
+
+We currently two static deployments, but we plan on adding more (contributions are welcome):
+
+### Currently supported
+
+* [Netlify](https://www.netlify.com/)
+* [Firebase Hosting](https://firebase.google.com/docs/hosting/)
+
+### Plan on supporting
+
+* [Heroku](https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-static)
+
+## Commands
 
 <!-- commands -->
 * [`redhead build`](#redhead-build)
