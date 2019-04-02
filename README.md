@@ -75,7 +75,7 @@ $ npm install -g redhead
 $ redhead COMMAND
 running command...
 $ redhead (-v|--version|version)
-redhead/0.3.2 darwin-x64 node-v10.15.1
+redhead/0.4.0 darwin-x64 node-v11.9.0
 $ redhead --help [COMMAND]
 USAGE
   $ redhead COMMAND
@@ -112,10 +112,11 @@ USAGE
   $ redhead build
 
 OPTIONS
-  -o, --output=output  [default: .] Folder where the generated files should be saved.
+  -o, --output=output              [default: .] Folder where the generated files should be saved.
+  -p, --platform=netlify|firebase  [default: netlify] The target platform for the generated files
 ```
 
-_See code: [src/commands/build.js](https://github.com/streaver/redhead/blob/v0.3.2/src/commands/build.js)_
+_See code: [src/commands/build.js](https://github.com/streaver/redhead/blob/v0.4.0/src/commands/build.js)_
 
 ## `redhead help [COMMAND]`
 
@@ -132,7 +133,7 @@ OPTIONS
   --all  see all commands in CLI
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.1.4/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.1.6/src/commands/help.ts)_
 
 ## `redhead init`
 
@@ -150,7 +151,7 @@ DESCRIPTION
   Generates files for handling your headers and/or redirects configuration.
 ```
 
-_See code: [src/commands/init.js](https://github.com/streaver/redhead/blob/v0.3.2/src/commands/init.js)_
+_See code: [src/commands/init.js](https://github.com/streaver/redhead/blob/v0.4.0/src/commands/init.js)_
 <!-- commandsstop -->
 
 ## Examples
