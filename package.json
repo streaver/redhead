@@ -24,7 +24,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0",
-    "globby": "^9",
+    "globby": "^10",
     "mocha": "^6",
     "mock-fs": "^4.8.0",
     "nyc": "^14"
